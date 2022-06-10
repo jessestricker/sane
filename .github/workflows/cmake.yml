@@ -16,3 +16,13 @@ jobs:
         run: pipx install cmakelang
       - name: Run cmake-format on all CMake files
         run: find . -name 'CMakeLists.txt' -exec cmake-format --check '{}' +
+  lint:
+    name: Check lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install cmake-format
+        run: pipx install cmakelang
+      - name: Run cmake-lint on all CMake files
+        run: find . -name 'CMakeLists.txt' -exec cmake-lint '{}' +
