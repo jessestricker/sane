@@ -7,9 +7,12 @@ on:
 
 jobs:
   format:
+    name: Check Format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: pipx install cmakelang
-      - run: |
-          find . -name 'CMakeLists.txt' -exec cmake-format --check {} \;
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install cmake-format
+        run: pipx install cmakelang
+      - name: Run cmake-format on all CMake files
+        run: find . -name 'CMakeLists.txt' -exec cmake-format --check '{}' +
