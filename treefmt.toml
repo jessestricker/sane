@@ -7,3 +7,8 @@ includes = ["*.cpp", "*.hpp"]
 command = "cmake-format"
 options = ["-i"]
 includes = ["CMakeLists.txt"]
+
+[formatter.nix]
+command = "alejandra"
+options = ["-q"]
+includes = ["*.nix"]
