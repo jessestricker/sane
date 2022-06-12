@@ -1,5 +1,5 @@
 {
-  description = "...";
+  description = "A better, safer C++ Core Library";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
