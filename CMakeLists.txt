@@ -11,3 +11,5 @@ function(sane_setup_build_reqs target_name)
   set_target_properties(${target_name} PROPERTIES CXX_EXTENSIONS NO
                                                   CXX_STANDARD_REQUIRED YES)
 endfunction()
+
+add_subdirectory(src/sane)
