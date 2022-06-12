@@ -1,0 +1,9 @@
+[formatter.cpp]
+command = "clang-format"
+options = ["-i"]
+includes = ["*.cpp", "*.hpp"]
+
+[formatter.cmake]
+command = "cmake-format"
+options = ["-i"]
+includes = ["CMakeLists.txt"]
