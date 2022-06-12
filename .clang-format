@@ -1,0 +1,8 @@
+BasedOnStyle: Google
+
+Language: Cpp
+Standard: Latest
+
+NamespaceIndentation: All
+
+AccessModifierOffset: -2
