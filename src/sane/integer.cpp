@@ -14,11 +14,4 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef SANE_SANE_HPP
-#define SANE_SANE_HPP
-
 #include <sane/integer.hpp>
-
-namespace sane {}
-
-#endif  // SANE_SANE_HPP
