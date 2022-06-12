@@ -18,6 +18,8 @@
         packages = with pkgs; [
           # C++
           cmake
+          ninja
+          gdb
 
           # Formatting
           treefmt
