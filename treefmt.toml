@@ -16,4 +16,4 @@ includes = ["*.nix"]
 [formatter.prettier]
 command = "prettier"
 options = ["-w"]
-includes = ["*.json",	"*.yml"]
+includes = ["*.json",	"*.md",	"*.yml"]
