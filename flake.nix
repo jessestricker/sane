@@ -26,6 +26,7 @@
           alejandra
           clang-tools
           cmake-format
+          nodePackages.prettier
         ];
       };
     });

@@ -12,3 +12,8 @@ includes = ["CMakeLists.txt"]
 command = "alejandra"
 options = ["-q"]
 includes = ["*.nix"]
+
+[formatter.prettier]
+command = "prettier"
+options = ["-w"]
+includes = ["*.json",	"*.yml"]
