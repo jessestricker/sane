@@ -19,3 +19,17 @@ jobs:
         run: nix develop -c cmake -B cmake-build -G Ninja
       - name: Build sane
         run: nix develop -c cmake --build cmake-build
+  format:
+    name: Check format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+      - name: Fetch Nix inputs
+        run: nix develop -c true
+      - name: Format all C++ files
+        run: git ls-files -z 'src/*.cpp' 'src/*.hpp' | xargs -0 nix develop -i -c clang-format -i
+      - name: Check for changed files
+        run: git diff --exit-code
