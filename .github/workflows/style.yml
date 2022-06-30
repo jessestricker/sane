@@ -1,0 +1,40 @@
+name: Style
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  format:
+    name: Check format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+      - name: Fetch Nix inputs
+        run: nix develop -i -c true
+
+      - name: Format all C++ files
+        run: git ls-files -z 'src/*.cpp' 'src/*.hpp' | xargs -0 nix develop -i -c clang-format -i
+      - name: Format all CMake files
+        run: git ls-files -z 'CMakeLists.txt' | xargs -0 nix develop -i -c cmake-format -i
+      - name: Check for changed files
+        run: git diff --exit-code
+
+  lint:
+    name: Check lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+      - name: Fetch Nix inputs
+        run: nix develop -i -c true
+
+      - name: Lint all CMake files
+        run: git ls-files -z 'CMakeLists.txt' | xargs -0 nix develop -i -c cmake-lint
