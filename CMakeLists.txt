@@ -4,12 +4,15 @@ project(
   VERSION 0.1.0
   LANGUAGES CXX)
 
-# Sets up common build requirements for a target.
+# sets up common build requirements for a target
 function(sane_setup_build_reqs target_name)
   target_include_directories(${target_name} PUBLIC ${PROJECT_SOURCE_DIR}/src)
-  target_compile_features(${target_name} PUBLIC cxx_std_20)
-  set_target_properties(${target_name} PROPERTIES CXX_EXTENSIONS NO
-                                                  CXX_STANDARD_REQUIRED YES)
+  set_target_properties(
+    ${target_name}
+    PROPERTIES CXX_STANDARD 20
+               CXX_STANDARD_REQUIRED YES
+               CXX_EXTENSIONS NO)
 endfunction()
 
+# include target definitions
 add_subdirectory(src/sane)
