@@ -12,7 +12,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
-//
 
 #ifndef SANE_INTEGER_HPP
 #define SANE_INTEGER_HPP
@@ -20,17 +19,45 @@
 #include <sane/detail/integer.hpp>
 
 namespace sane {
-  using UInt8 = detail::UnsignedInteger<1>;
-  using UInt16 = detail::UnsignedInteger<2>;
-  using UInt32 = detail::UnsignedInteger<4>;
-  using UInt64 = detail::UnsignedInteger<8>;
-  using USize = detail::UnsignedInteger<detail::pointer_size>;
+  struct UInt8 : detail::UnsignedIntegerBase<1, UInt8> {
+    using UnsignedIntegerBase::UnsignedIntegerBase;
+  };
 
-  using Int8 = detail::SignedInteger<1>;
-  using Int16 = detail::SignedInteger<2>;
-  using Int32 = detail::SignedInteger<4>;
-  using Int64 = detail::SignedInteger<8>;
-  using ISize = detail::SignedInteger<detail::pointer_size>;
+  struct UInt16 : detail::UnsignedIntegerBase<2, UInt16> {
+    using UnsignedIntegerBase::UnsignedIntegerBase;
+  };
+
+  struct UInt32 : detail::UnsignedIntegerBase<4, UInt32> {
+    using UnsignedIntegerBase::UnsignedIntegerBase;
+  };
+
+  struct UInt64 : detail::UnsignedIntegerBase<8, UInt64> {
+    using UnsignedIntegerBase::UnsignedIntegerBase;
+  };
+
+  struct USize : detail::UnsignedIntegerBase<detail::pointer_size, USize> {
+    using UnsignedIntegerBase::UnsignedIntegerBase;
+  };
+
+  struct Int8 : detail::SignedIntegerBase<1, Int8> {
+    using SignedIntegerBase::SignedIntegerBase;
+  };
+
+  struct Int16 : detail::SignedIntegerBase<2, Int16> {
+    using SignedIntegerBase::SignedIntegerBase;
+  };
+
+  struct Int32 : detail::SignedIntegerBase<4, Int32> {
+    using SignedIntegerBase::SignedIntegerBase;
+  };
+
+  struct Int64 : detail::SignedIntegerBase<8, Int64> {
+    using SignedIntegerBase::SignedIntegerBase;
+  };
+
+  struct ISize : detail::SignedIntegerBase<detail::pointer_size, ISize> {
+    using SignedIntegerBase::SignedIntegerBase;
+  };
 }
 
 #endif  // SANE_INTEGER_HPP

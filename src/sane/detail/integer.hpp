@@ -22,46 +22,46 @@ namespace sane::detail {
   constexpr SizeType pointer_size = sizeof(void*);
 
   template <bool Signed, SizeType Size>
-  consteval auto integer_declval() noexcept {
-    if constexpr (Signed) {
-      if constexpr (Size == sizeof(signed char)) {
-        return static_cast<signed char>(0);
-      }
-      if constexpr (Size == sizeof(short int)) {
-        return static_cast<short int>(0);
-      }
-      if constexpr (Size == sizeof(int)) {
-        return static_cast<int>(0);
-      }
-      if constexpr (Size == sizeof(long int)) {
-        return static_cast<long int>(0);
-      }
-      if constexpr (Size == sizeof(long long int)) {
-        return static_cast<long long int>(0);
-      }
-    } else {
-      if constexpr (Size == sizeof(unsigned char)) {
-        return static_cast<unsigned char>(0);
-      }
-      if constexpr (Size == sizeof(unsigned short int)) {
-        return static_cast<unsigned short int>(0);
-      }
-      if constexpr (Size == sizeof(unsigned int)) {
-        return static_cast<unsigned int>(0);
-      }
-      if constexpr (Size == sizeof(unsigned long int)) {
-        return static_cast<unsigned long int>(0);
-      }
-      if constexpr (Size == sizeof(unsigned long long int)) {
-        return static_cast<unsigned long long int>(0);
-      }
+  consteval auto declval_stdint() noexcept {
+    using SignedChar = signed char;
+    using ShortInt = short int;
+    using Int = int;
+    using LongInt = long int;
+    using LongLongInt = long long int;
+
+    using UnsignedChar = unsigned char;
+    using UnsignedShortInt = unsigned short int;
+    using UnsignedInt = unsigned int;
+    using UnsignedLongInt = unsigned long int;
+    using UnsignedLongLongInt = unsigned long long int;
+
+    if constexpr (Signed && Size == sizeof(SignedChar)) {
+      return SignedChar{};
+    } else if constexpr (Signed && Size == sizeof(ShortInt)) {
+      return ShortInt{};
+    } else if constexpr (Signed && Size == sizeof(Int)) {
+      return Int{};
+    } else if constexpr (Signed && Size == sizeof(LongInt)) {
+      return LongInt{};
+    } else if constexpr (Signed && Size == sizeof(LongLongInt)) {
+      return LongLongInt{};
+    } else if constexpr (!Signed && Size == sizeof(UnsignedChar)) {
+      return UnsignedChar{};
+    } else if constexpr (!Signed && Size == sizeof(UnsignedShortInt)) {
+      return UnsignedShortInt{};
+    } else if constexpr (!Signed && Size == sizeof(UnsignedInt)) {
+      return UnsignedInt{};
+    } else if constexpr (!Signed && Size == sizeof(UnsignedLongInt)) {
+      return UnsignedLongInt{};
+    } else if constexpr (!Signed && Size == sizeof(UnsignedLongLongInt)) {
+      return UnsignedLongLongInt{};
     }
   }
 
-  template <bool Signed, SizeType Size>
+  template <bool Signed, SizeType Size, class Self>
   class IntegerBase {
   public:
-    using Value = decltype(integer_declval<Signed, Size>());
+    using Value = decltype(declval_stdint<Signed, Size>());
 
     constexpr IntegerBase() noexcept = default;
 
@@ -69,16 +69,14 @@ namespace sane::detail {
     Value value_{};
   };
 
-  template <SizeType Size>
-  class UnsignedInteger : public IntegerBase<false, Size> {
-  public:
-    using IntegerBase<false, Size>::IntegerBase;
+  template <SizeType Size, class Self>
+  struct UnsignedIntegerBase : IntegerBase<false, Size, Self> {
+    using IntegerBase<false, Size, Self>::IntegerBase;
   };
 
-  template <SizeType Size>
-  class SignedInteger : public IntegerBase<true, Size> {
-  public:
-    using IntegerBase<false, Size>::IntegerBase;
+  template <SizeType Size, class Self>
+  struct SignedIntegerBase : IntegerBase<true, Size, Self> {
+    using IntegerBase<true, Size, Self>::IntegerBase;
   };
 }
 
