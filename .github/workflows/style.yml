@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /nix/store
-          key: ${{ runner.os }}-nix-store-${{ hashFiles('**/flake.{nix,lock}') }}
+          key: ${{ runner.os }}-nix-store-${{ hashFiles('**/flake.lock') }}
       - name: Fetch Nix inputs
         run: nix develop -i -c true
 
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /nix/store
-          key: ${{ runner.os }}-nix-store-${{ hashFiles('**/flake.{nix,lock}') }}
+          key: ${{ runner.os }}-nix-store-${{ hashFiles('**/flake.lock') }}
       - name: Fetch Nix inputs
         run: nix develop -i -c true
 
