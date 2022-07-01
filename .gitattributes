@@ -1,0 +1,2 @@
+# By default, all files are considered to contain text and their line endings are normalized to LF.
+* text eol=lf
