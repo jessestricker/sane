@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Nix
-        uses: cachix/install-nix-action@v17
+        uses: cachix/install-nix-action@v20
       - name: Cache Nix store
         uses: actions/cache@v3
         with:
@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Nix
-        uses: cachix/install-nix-action@v17
+        uses: cachix/install-nix-action@v20
       - name: Cache Nix store
         uses: actions/cache@v3
         with:
